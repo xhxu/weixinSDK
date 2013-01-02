@@ -2,7 +2,7 @@
 /**
  *	微信 公众平台消息接口 SDK
  *  @author xhxu xh_xu@qq.com/QQ:7844577
- *  @version 1.0.20130102
+ *  @version 1.0.20130103
  */
 class Weixin
 {
@@ -11,16 +11,12 @@ class Weixin
 	public $flag = false;
 	public $msgtype = 'text';	//('text','image','location')
 	Public $msg = array();
-	Public $version = '1.0.20130102';
+	Public $version = '1.0.20130103';
 
 	public function __construct($token,$debug)
 	{
 		$this->token = $token;
 		$this->debug = $debug;
-	}
-	public function setFlag()
-	{
-		$this->flag = true;
 	}
 	public function getMsg()
 	{
@@ -68,12 +64,16 @@ class Weixin
 			<FuncFlag>%s</FuncFlag>
 			</xml>";
 		$Content = '';
-		if (is_array($newsData['items'])) {
-			foreach ($newsData['items'] as $item) {
-				$Content .= sprintf($newTplItem,$item['title'],$item['description'],$item['picurl'],$item['url']);
+		$itemsCount = count($newsData['items']);
+		$itemsCount = $itemsCount < 10 ? $itemsCount : 10;
+		if ($itemsCount) {
+			foreach ($newsData['items'] as $key => $item) {
+				if ($key<=9) {
+					$Content .= sprintf($newTplItem,$item['title'],$item['description'],$item['picurl'],$item['url']);
+				}
 			}
 		}
-		$header = sprintf($newTplHeader,$newsData['content'],$newsData['itemsCount']);
+		$header = sprintf($newTplHeader,$newsData['content'],$itemsCount);
 		$footer = sprintf($newTplFoot,$FuncFlag);
 		return $header . $Content . $footer;
 	}
