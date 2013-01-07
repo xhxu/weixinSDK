@@ -2,7 +2,7 @@
 /**
  *	微信 公众平台消息接口 SDK
  *  @author xhxu xh_xu@qq.com/QQ:7844577
- *  @version 1.0.20130103
+ *  @version 1.0.20130107
  */
 class Weixin
 {
@@ -11,7 +11,7 @@ class Weixin
 	public $flag = false;
 	public $msgtype = 'text';	//('text','image','location')
 	Public $msg = array();
-	Public $version = '1.0.20130103';
+	Public $version = '1.0.20130107';
 
 	public function __construct($token,$debug)
 	{
@@ -50,7 +50,7 @@ class Weixin
 		$newTplHeader = "<xml>
 			<ToUserName><![CDATA[{$this->msg['FromUserName']}]]></ToUserName>
 			<FromUserName><![CDATA[{$this->msg['ToUserName']}]]></FromUserName>
-			<CreateTime>{$time}</CreateTime>
+			<CreateTime>{$CreateTime}</CreateTime>
 			<MsgType><![CDATA[news]]></MsgType>
 			<Content><![CDATA[%s]]></Content>
 			<ArticleCount>%s</ArticleCount><Articles>";
