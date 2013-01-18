@@ -2,7 +2,7 @@
 /**
  *	微信 公众平台消息接口 SDK
  *  @author xhxu xh_xu@qq.com/QQ:7844577
- *  @version 1.0.20130107
+ *  @version 1.0.20130119
  */
 class Weixin
 {
@@ -11,18 +11,20 @@ class Weixin
 	public $flag = false;
 	public $msgtype = 'text';	//('text','image','location')
 	Public $msg = array();
-	Public $version = '1.0.20130107';
+	Public $version = '1.0.20130119';
+	private $logPath = '';
 
-	public function __construct($token,$debug)
+	public function __construct($token,$debug,$log='./')
 	{
 		$this->token = $token;
 		$this->debug = $debug;
+		$this->logPath = $log;
 	}
 	public function getMsg()
 	{
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 		if ($this->debug) {
-			file_put_contents('./log.txt', $postStr."\n",FILE_APPEND);
+			file_put_contents($this->logPath .'log.txt', $postStr."\n",FILE_APPEND);
 		}
 		if (!empty($postStr)) {
 			$this->msg = (array)simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -80,7 +82,7 @@ class Weixin
 	public function reply($data)
 	{
 		if ($this->debug) {
-			file_put_contents('./reply.txt', $data."\n",FILE_APPEND);
+			file_put_contents($this->logPath .'reply.txt', $data."\n",FILE_APPEND);
 		}
 		echo $data;
 	}
@@ -93,7 +95,7 @@ class Weixin
 				exit;
 			}
 		}else{
-			file_put_contents('./log.txt', 'valid fild'."\n",FILE_APPEND);
+			file_put_contents($this->logPath .'log.txt', 'valid fild'."\n",FILE_APPEND);
 			exit;
 		}
 	}
@@ -115,4 +117,3 @@ class Weixin
 		}
 	}
 }
-
