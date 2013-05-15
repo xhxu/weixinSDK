@@ -45,6 +45,25 @@ class Weixin
 			</xml>";
 		return sprintf($textTpl,$text,$FuncFlag);
 	}
+	public function makeMusic($title='',$des='',$musicurl='')
+	{
+		$CreateTime = time();
+		$FuncFlag = $this->setFlag ? 1 : 0;
+			$textTpl = "<xml>
+			<ToUserName><![CDATA[{$this->msg['FromUserName']}]]></ToUserName>
+			<FromUserName><![CDATA[{$this->msg['ToUserName']}]]></FromUserName>
+			<CreateTime>{$CreateTime}</CreateTime>
+			<MsgType><![CDATA[music]]></MsgType>
+			<Music>
+			<Title><![CDATA[%s]]></Title>
+			<Description><![CDATA[%s]]></Description>
+			<MusicUrl><![CDATA[%s]]></MusicUrl>
+			<HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+			</Music>
+			<FuncFlag>%s</FuncFlag>
+			</xml>";
+		return sprintf($textTpl,$title,$des,$musicurl,$musicurl,$FuncFlag);
+	}
 	public function makeNews($newsData=array())
 	{
 		$CreateTime = time();
