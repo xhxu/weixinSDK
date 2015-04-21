@@ -1,7 +1,7 @@
 <?php
 /**
  *	微信 公众平台消息接口 SDK
- *  @author xhxu xh_xu@qq.com/QQ:7844577
+ *  @author xhxu xh_xu@qq.com/QQ:78445766
  *  @version 1.0.20130122
  */
 class Weixin
